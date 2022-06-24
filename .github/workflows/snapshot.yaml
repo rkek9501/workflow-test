@@ -46,17 +46,14 @@ jobs:
         run: yarn test
 
       # Test Update / Commit & Push
-      - name: update
-        if: ${{ failure() && steps.test.conclusion == 'failure' }}
-        run: |
-          pwd
-          echo 1 > ./test/source.txt
-          cat ./test/source.txt
-
       - name: Test update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
-        run: yarn test-update
+        run: |
+          pwd
+          && echo 1 > ./test/source.txt
+          && cat ./test/source.txt
+          && yarn test-update
 
       - name: Commit & Push Snapshot
         if: ${{ success() && steps.update.conclusion == 'success' }}
