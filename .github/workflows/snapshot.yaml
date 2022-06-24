@@ -50,14 +50,15 @@ jobs:
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
         run: |
+          echo 1 > ./test/source.txt
           yarn test-update
 
       - name: Test update / Commit & Push Snapshot
         if: ${{ success() && steps.update.conclusion == 'success' }}
         uses: EndBug/add-and-commit@v9
         with:
-          author_name: Your Name
-          author_email: mail@example.com
+          author_name: snapshot[bot]
+          author_email: snapshot[bot]@test.com
           message: 'Snapshot Update'
           add: 'test/.jest-test-results.json'
 
