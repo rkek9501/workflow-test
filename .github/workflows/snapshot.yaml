@@ -48,7 +48,6 @@ jobs:
       # Test Update / Commit & Push
       - name: update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
-        id: update
         run: |
           pwd
           echo 1 > ./test/source.txt
