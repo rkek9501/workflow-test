@@ -6,6 +6,7 @@ name: CD
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   workflow_run:
+    branches: [main]
     workflows: [snapshot]
     types: [completed]
 
