@@ -28,13 +28,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Remove node_modules
-      - name: Remove node_modules
-        run: rm -rf node_modules/
+      # # Remove node_modules
+      # - name: Remove node_modules
+      #   run: rm -rf node_modules/
 
-      # Yarn Cache Clean
-      - name: Yarn Cache Clean
-        run: yarn cache clean
+      # # Yarn Cache Clean
+      # - name: Yarn Cache Clean
+      #   run: yarn cache clean
 
       # package Install
       - name: Yarn Install
@@ -46,14 +46,18 @@ jobs:
         run: yarn test
 
       # Test Update / Commit & Push
-      - name: Test update
+      - name: update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
         run: |
           pwd
           echo 1 > ./test/source.txt
           cat ./test/source.txt
-          yarn test-update
+
+      - name: Test update
+        if: ${{ failure() && steps.test.conclusion == 'failure' }}
+        id: update
+        run: yarn test-update
 
       - name: Commit & Push Snapshot
         if: ${{ success() && steps.update.conclusion == 'success' }}
