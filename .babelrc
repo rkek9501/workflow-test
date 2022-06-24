@@ -1,0 +1,19 @@
+{
+  "presets": [
+    // [ "@babel/preset-typescript", { 
+    //   "allowDeclareFields": true 
+    // }],
+    [ "next/babel" ]
+  ],
+  "plugins": [
+    [ "@babel/plugin-transform-typescript", { 
+      "allowDeclareFields": true 
+    }],
+    "babel-plugin-macros",
+    [ "babel-plugin-styled-components", {
+      "fileName": true,
+      "displayName": true,
+      "pure": true
+    }]
+  ]
+}

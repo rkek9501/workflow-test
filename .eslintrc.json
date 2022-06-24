@@ -1,0 +1,74 @@
+{
+  "env": { "browser": true, "node": true, "jest/globals": true },
+  "extends": [
+    "plugin:@typescript-eslint/eslint-recommended",
+    "airbnb/base"
+  ],
+  "settings": {
+    "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] },
+    "import/resolver": { "typescript": "./tsconfig.json" }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module", // Allows for the use of imports
+    "ecmaFeatures": {
+      "jsx": true // Allows for the parsing of JSX
+    },
+    "project": ["./tsconfig.json", "./next.config.js"]
+  },
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "jest", "jsx-a11y"],
+  "rules": {
+    "arrow-body-style": "off",
+    "no-console": "off",
+    "no-nested-ternary": "off",
+    "no-use-before-define": "off",
+    "no-undef": "off",
+    "no-unused-expressions": "warn",
+    "no-restricted-imports": "warn",
+    "no-restricted-syntax": ["warn", "WithStatement", "BinaryExpression[operator='in']"],
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "class-methods-use-this": "off",
+    "lines-between-class-members": "off",
+    "max-len": ["warn", { "code": 120 }],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "semi": ["error", "always"],
+    "no-extra-semi": "error",
+    "quotes": ["warn", "double", "avoid-escape"],
+    "jsx-quotes": ["warn", "prefer-double"],
+    "quote-props": ["warn", "as-needed"],
+    "sort-imports": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { "js": "never", "jsx": "never", "ts": "never", "tsx": "never" }
+    ],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "comma-dangle": ["error","never"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [2, {"extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-one-expression-per-line": ["off", { "allow": "none" }],
+    // "@typescript-eslint/camelcase": "warn",
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+    // "object-curly-newline": ["error", {
+    //   "ObjectExpression": "never",
+    //   "ObjectPattern": { "multiline": true },
+    //   "ImportDeclaration": "never",
+    //   "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+    // }],
+  },
+  "ignorePatterns": [
+    "node_modules/*",
+    ".next/", ".vscode/",
+    "storybook-static/",
+    "public/",
+    "**/__snapshots_/",
+    "next.config.js",
+    "storybook.test.js"
+  ]
+}

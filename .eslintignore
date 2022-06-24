@@ -1,0 +1,7 @@
+.next/
+node_modules/
+.vscode/
+storybook-static/
+public/
+next-env.d.ts
+jest.config.js
