@@ -45,7 +45,7 @@ jobs:
         id: test
         run: yarn test
 
-      # Test Update / Commit & Push
+      # Test Update /i Commit & Push
       - name: Test update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
@@ -62,7 +62,7 @@ jobs:
           author_name: snapshot[bot]
           author_email: snapshot[bot]@test.com
           message: 'Snapshot Update'
-          add: 'test/.jest-test-results.json'
+          add: 'test'
 
 
   # ci-snapshot:
