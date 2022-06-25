@@ -65,7 +65,7 @@ jobs:
           committer_email: snapshot-bot@github.com
           message: 'Snapshot Update'
           add: '.'
-          push: origin main
+          push: origin HEAD:main
 
   # ci-snapshot:
   #   needs: ci-test
