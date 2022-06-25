@@ -59,7 +59,7 @@ jobs:
           yarn test-update
           
       - name: Check Diff
-      - uses: technote-space/get-diff-action@v6
+        uses: technote-space/get-diff-action@v6
         with:
           FILES: test/source.txt
 
