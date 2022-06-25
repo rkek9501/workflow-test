@@ -63,8 +63,15 @@ jobs:
         with:
           FILES: test/source.txt
 
+      - name: Check
+        run: |
+          echo ${{ env.GIT_DIFF }}
+          echo ${{ env.MATCHED_FILES }}
+          echo ${{ env.GIT_DIFF_FILTERED }}
+          echo ${{ env.SET_ENV_NAME_COUNT }}
+
       - name: Commit & Push Snapshot
-        if: ${{ env.GIT_DIFF && env.MATCHED_FILES }}
+        if: ${{ env.GIT_DIFF && env.SET_ENV_NAME_COUNT == 1 }}
         uses: EndBug/add-and-commit@v9
         with:
           committer_name: snapshot-bot
