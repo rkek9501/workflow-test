@@ -22,13 +22,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Git Checkout
       - uses: actions/checkout@v2
+
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3.0.0
         with:
           node-version: ${{ matrix.node-version }}
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.TOKEN }}
 
       # # Remove node_modules
       # - name: Remove node_modules
@@ -58,12 +58,13 @@ jobs:
           yarn test-update
 
       - name: Commit & Push Snapshot
-        # if: ${{ steps.test.conclusion == 'failure' && steps.update.conclusion == 'success' }}
-        uses: stefanzweifel/git-auto-commit-action@v4
+        if: ${{ failure() && steps.test.conclusion == 'failure' }}
+        uses: EndBug/add-and-commit@v9
         with:
-          commit_message: 'Snapshot Update'
-          file_pattern: './test'
-
+          committer_name: snapshot-bot
+          committer_email: snapshot-bot@github.com
+          message: 'Snapshot Update'
+          add: '.'
 
   # ci-snapshot:
   #   needs: ci-test
