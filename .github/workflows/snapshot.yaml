@@ -27,6 +27,8 @@ jobs:
         uses: actions/setup-node@v3.0.0
         with:
           node-version: ${{ matrix.node-version }}
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.TOKEN }}
 
       # # Remove node_modules
       # - name: Remove node_modules
@@ -57,12 +59,10 @@ jobs:
 
       - name: Commit & Push Snapshot
         if: ${{ success() }}
-        uses: EndBug/add-and-commit@v9
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          author_name: snapshot[bot]
-          author_email: snapshot[bot]@test.com
-          message: 'Snapshot Update'
-          add: 'test'
+          commit_message: 'Snapshot Update'
+          file_pattern: './test'
 
 
   # ci-snapshot:
