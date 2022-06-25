@@ -56,7 +56,7 @@ jobs:
           yarn test-update
 
       - name: Commit & Push Snapshot
-        if: ${{ success() && steps.update.conclusion == 'success' }}
+        if: ${{ success() }}
         uses: EndBug/add-and-commit@v9
         with:
           author_name: snapshot[bot]
