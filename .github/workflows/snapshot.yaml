@@ -58,7 +58,7 @@ jobs:
           yarn test-update
 
       - name: Commit & Push Snapshot
-        if: ${{ steps.test.conclusion == 'failure' && steps.update.conclusion == 'success' }}
+        if: ${{ failure() && steps.test.conclusion == 'failure' }}
         uses: EndBug/add-and-commit@v9
         with:
           committer_name: snapshot-bot
