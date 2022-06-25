@@ -28,13 +28,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Remove node_modules
-      - name: Remove node_modules
-        run: rm -rf node_modules/
+      # # Remove node_modules
+      # - name: Remove node_modules
+      #   run: rm -rf node_modules/
 
-      # Yarn Cache Clean
-      - name: Yarn Cache Clean
-        run: yarn cache clean
+      # # Yarn Cache Clean
+      # - name: Yarn Cache Clean
+      #   run: yarn cache clean
 
       # package Install
       - name: Yarn Install
@@ -49,10 +49,10 @@ jobs:
       - name: Test update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
+        # echo 1 > /home/runner/work/workflow-test/workflow-test/test/source.txt
+        # cat /home/runner/work/workflow-test/workflow-test/test/source.txt
         run: |
           pwd
-          echo 1 > ./test/source.txt
-          cat ./test/source.txt
           yarn test-update
 
       - name: Commit & Push Snapshot
