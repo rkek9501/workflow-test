@@ -9,7 +9,7 @@
     "lint": "next lint --dir pages --dir src",
     "test": "MODE=test jest --config ./jest.config.js",
     "update": "echo 1 > test/source.txt && cat test/source.txt",
-    "test-update": "yarn update && MODE=test jest --config ./jest.config.js --json --outputFile=test/.jest-test-results.json -u",
+    "test-update": "MODE=test jest --config ./jest.config.js --json --outputFile=test/.jest-test-results.json -u",
     "prod-build": "NODE_ENV=production next build"
   },
   "resolutions": {
