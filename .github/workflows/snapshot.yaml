@@ -58,7 +58,7 @@ jobs:
           yarn test-update
 
       - name: Commit & Push Snapshot
-        if: ${{ steps.test.conclusion == 'failure' && steps.update.conclusion == 'success' }}
+        # if: ${{ steps.test.conclusion == 'failure' && steps.update.conclusion == 'success' }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'Snapshot Update'
