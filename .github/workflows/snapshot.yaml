@@ -49,10 +49,10 @@ jobs:
       - name: Test update
         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
-        # echo 1 > /home/runner/work/workflow-test/workflow-test/test/source.txt
-        # cat /home/runner/work/workflow-test/workflow-test/test/source.txt
         run: |
           pwd
+          echo -n 1 > test/source.txt
+          cat test/source.txt
           yarn test-update
 
       - name: Commit & Push Snapshot
