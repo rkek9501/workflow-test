@@ -44,22 +44,27 @@ jobs:
         run: yarn
 
       # Test
-      - name: Test
-        id: test
-        run: yarn test
+#       - name: Test
+#         id: test
+#         run: yarn test
 
       # Test Update /i Commit & Push
       - name: Test update
-        if: ${{ failure() && steps.test.conclusion == 'failure' }}
+#         if: ${{ failure() && steps.test.conclusion == 'failure' }}
         id: update
         run: |
           pwd
           echo -n 1 > test/source.txt
           cat test/source.txt
           yarn test-update
+          
+      - name: Check Diff
+      - uses: technote-space/get-diff-action@v6
+        with:
+          FILES: test/source.txt
 
       - name: Commit & Push Snapshot
-        if: ${{ failure() && steps.test.conclusion == 'failure' }}
+        if: ${{ env.GIT_DIFF && env.MATCHED_FILES }}
         uses: EndBug/add-and-commit@v9
         with:
           committer_name: snapshot-bot
