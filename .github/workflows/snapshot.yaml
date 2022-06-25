@@ -65,7 +65,7 @@ jobs:
           committer_email: snapshot-bot@github.com
           message: 'Snapshot Update'
           add: '.'
-          push: origin HEAD:${{ github.head_ref }}
+          push: origin HEAD:${{ github.event.pull_request.head_ref }}
 
   # ci-snapshot:
   #   needs: ci-test
