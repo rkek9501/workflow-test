@@ -23,14 +23,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Git Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ github.TOKEN }}
+
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3.0.0
         with:
           node-version: ${{ matrix.node-version }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
-          token: ${{ github.TOKEN }}
+          
       # # Remove node_modules
       # - name: Remove node_modules
       #   run: rm -rf node_modules/
@@ -68,10 +72,10 @@ jobs:
           echo ${{ env.GIT_DIFF }}
           echo ${{ env.MATCHED_FILES }}
           echo ${{ env.GIT_DIFF_FILTERED }}
-          echo ${{ env.SET_ENV_NAME_COUNT }}
+          echo ${{ env.GET_ENV_NAME_COUNT }}
 
       - name: Commit & Push Snapshot
-        if: ${{ env.GIT_DIFF && env.SET_ENV_NAME_COUNT == 1 }}
+        if: ${{ env.GIT_DIFF && env.GET_ENV_NAME_COUNT == 1 }}
         uses: EndBug/add-and-commit@v9
         with:
           committer_name: snapshot-bot
