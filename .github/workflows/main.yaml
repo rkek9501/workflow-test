@@ -2,8 +2,7 @@ name: CD
 
 on:
   workflow_run:
-    branches: [main]
-    workflows: [snapshot]
+    workflows: ["snapshot"]
 
 jobs:
   snapshot_updates:
