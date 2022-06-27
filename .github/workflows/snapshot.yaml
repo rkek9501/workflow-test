@@ -25,10 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Git Checkout
         uses: actions/checkout@v2
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
-          token: ${{ github.TOKEN }}
+#         with:
+#           repository: ${{ github.event.pull_request.head.repo.full_name }}
+#           ref: ${{ github.event.pull_request.head.ref }}
+#           token: ${{ github.TOKEN }}
 
       - name: use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3.0.0
