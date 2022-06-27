@@ -63,11 +63,14 @@ jobs:
           yarn test-update
           
       - name: Check Diff
+        id: diff
+        if: ${{ steps.update.conclusion == 'success' }}
         uses: technote-space/get-diff-action@v6
         with:
           FILES: test/source.txt
 
       - name: Check
+        if: ${{ steps.diff.conclusion == 'success' }}
         run: |
           echo ${{ env.GIT_DIFF }}
           echo ${{ env.MATCHED_FILES }}
@@ -75,7 +78,7 @@ jobs:
           echo ${{ env.GET_ENV_NAME_COUNT }}
 
       - name: Commit & Push Snapshot
-        if: ${{ env.GIT_DIFF && env.GET_ENV_NAME_COUNT == 1 }}
+        if: ${{ steps.diff.conclusion == 'success' && env.GIT_DIFF && env.GET_ENV_NAME_COUNT == 1 }}
         uses: EndBug/add-and-commit@v9
         with:
           committer_name: snapshot-bot
