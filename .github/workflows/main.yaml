@@ -16,11 +16,20 @@ jobs:
       matrix:
         node-version: [16.x]
 
-    steps:
+    steps:    
       - name: Git Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           token: ${{ github.TOKEN }}
+
+      - name: use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Yarn Install
+        run: yarn
+
       - run: |
           echo -n 1 > test/source.txt
           cat test/source.txt
@@ -30,7 +39,6 @@ jobs:
           git add .
           git commit -m "generated"
           git push
-        
 
   cd:
     if: >
