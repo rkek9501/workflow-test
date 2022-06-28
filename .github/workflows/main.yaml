@@ -3,6 +3,8 @@ name: CD
 on:
   workflow_run:
     workflows: ["snapshot"]
+    types:
+      - completed
 
 jobs:
   snapshot_updates:
@@ -31,6 +33,7 @@ jobs:
         run: yarn
 
       - run: |
+          git pull
           echo -n 1 > test/source.txt
           cat test/source.txt
           yarn test-update
@@ -41,9 +44,10 @@ jobs:
           git push
 
   cd:
+    needs: snapshot_updates
     if: >
-      ${{ github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.conclusion == 'success' }}
+      ${{ (github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success')
+      ||(github.event.workflow_run.conclusion === 'failure' && jobs.snapshot_updates.conclusion == 'success') }}
 
     runs-on: ubuntu-latest
 
